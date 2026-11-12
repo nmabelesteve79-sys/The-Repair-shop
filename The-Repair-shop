@@ -1,0 +1,149 @@
+list_of_repairs = [
+    {'item': 'Laptop', 'damage': 'Screen damage', 'price': 65000},
+    {'item': 'Laptop', 'damage': 'Crashed operating system', 'price': 35000},
+    {'item': 'Laptop', 'damage': 'Damaged keyboard', 'price': 12000},
+    {'item': 'Phone', 'damage': 'Screen damage', 'price': 30000},
+    {'item': 'Phone', 'damage': 'Battery issues', 'price': 15000},
+    {'item': 'Phone', 'damage': 'Damaged screen guard', 'price': 5000},
+    {'item': 'Television', 'damage': ' Screen damaged', 'price': 70000},
+    {'item': 'Television', 'damage': 'No sound', 'price': 32250}
+]
+
+
+
+database = [{'customer': 'John',
+            'item'    : 'Laptop',
+            'problem' : 'Screen damage',
+            'price'    : 65000,
+            'status'  : 'pending'}]
+
+class RepairJob:
+    def __init__(self, customer, item, problem, cost, status):
+        self.customer = customer
+        self.item = item
+        self.problem = problem
+        self.cost = cost
+        self.status = status
+
+
+
+def add_repair():
+        name = input('Customer: ')
+        items = input('Item: ')
+        problems = input('Problem: ')
+        costss = 0
+        statu = input('Status: ')
+
+
+        for damages in list_of_repairs:
+            if  damages['item'] == items and damages['damage']  == problems :
+                costs = damages['price']
+                costss += costs
+        print(f'Cost: {costss}')
+
+        master = RepairJob(name, items, problems, costss, statu)
+
+
+
+        info = {'customer' : name,
+                'item' : items,
+                'damage' :problems,
+                'price' :costss,
+                'status' : statu}
+
+        add_info = database.append(info)
+
+
+def view_repairs():
+
+        for data in database:
+            print(data)
+
+
+
+def search_repair():
+    search = input("CustomerIdentification: ")
+    for data in database:
+        if search == data['customer']:
+            print(data)
+
+def update_status():
+        lucky_guy = input("Update who's record: ")
+        for  data in database:
+
+            if lucky_guy == data['customer']:
+                 statu = input("""
+ Status: 
+1.) Pending
+2.) In progress
+3.) Completed
+
+Update to > """).lower()
+                 updates =  {'status' : statu}
+                 data.update(updates)
+
+
+
+
+def total_earnings():
+    costs = 0
+    for data in database:
+        if data['status'] ==  'completed':
+            price = data['price']
+            costs += price
+    print(f'Total:{costs} ')
+
+
+repair_shop = ''
+
+while repair_shop != 'Exit':
+    repair_shop = int(input("""                                             ==============================================
+                                                         REPAIR SHOP MANAGER
+                                             ==============================================
+                                             1.) Add repair job
+                                             2.) View all repair jobs
+                                             3.) Search for a repair 
+                                             4.) Update repair status
+                                             5.) Calculate total earnings
+                                             6.) Exit
+
+        What do you want to do: """))
+
+    if repair_shop == 1:
+        add_repair()
+
+    if repair_shop == 2:
+        view_repairs()
+
+    if repair_shop == 3:
+        search_repair()
+
+    if repair_shop == 4:
+        update_status()
+
+    if repair_shop == 5:
+        total_earnings()
+
+    if repair_shop == 6 :
+        out = input('Do you want to exit: ')
+        if out == 'yes':
+            print('Exited')
+            break
+
+        else:
+            pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
